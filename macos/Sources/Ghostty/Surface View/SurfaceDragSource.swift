@@ -136,6 +136,15 @@ extension Ghostty {
                 owner: self,
                 userInfo: nil
             ))
+
+            guard let window else {
+                onHoverChanged?(false)
+                return
+            }
+
+            let windowPoint = window.mouseLocationOutsideOfEventStream
+            let localPoint = convert(windowPoint, from: nil)
+            onHoverChanged?(bounds.contains(localPoint))
         }
         
         override func resetCursorRects() {
